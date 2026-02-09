@@ -26,96 +26,113 @@ const galleryImages = computed(() => yacht.value?.images ?? [yacht.value!.image]
 </script>
 
 <template>
-  <div v-if="yacht">
-    <UPageHero
-      :title="yacht.title"
-      :description="yacht.fullDescription"
-      :links="[
-        { label: 'Арендовать', icon: 'i-lucide-calendar-check', onClick: () => { bookingModal = true } },
-        { label: 'Все яхты', to: '/yachts', variant: 'soft' as const, color: 'neutral' as const, icon: 'i-lucide-arrow-left' }
-      ]"
-    />
+  <div v-if="yacht" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+    <!-- Back link -->
+    <NuxtLink
+      to="/yachts"
+      class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-highlighted transition-colors mb-4"
+    >
+      <UIcon name="i-lucide-arrow-left" class="size-4" />
+      Все яхты
+    </NuxtLink>
 
-    <UPageSection v-reveal headline="Галерея" title="Фотографии">
-      <ImageCarousel :images="galleryImages" :alt="yacht.title" />
-    </UPageSection>
-
-    <UPageSection v-reveal headline="Характеристики" title="О яхте">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-sailboat" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Тип</p>
-              <p class="font-medium">{{ yacht.type }}</p>
-            </div>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-users" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Вместимость</p>
-              <p class="font-medium">до {{ yacht.capacity }} чел.</p>
-            </div>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-ruler" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Длина</p>
-              <p class="font-medium">{{ yacht.length }}</p>
-            </div>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-dollar-sign" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Стоимость</p>
-              <p class="font-medium">{{ yacht.pricePerHour }} $/час</p>
-            </div>
-          </div>
-        </UCard>
+    <!-- Two-column layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      <!-- Left: Carousel -->
+      <div class="lg:col-span-7 lg:sticky lg:top-20 lg:self-start">
+        <ImageCarousel :images="galleryImages" :alt="yacht.title" />
       </div>
-    </UPageSection>
 
-    <UPageSection v-reveal headline="На борту" title="Удобства и оснащение">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <UCard v-for="(feature, index) in yacht.features" :key="index">
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-check-circle" class="size-5 text-primary shrink-0" />
-            <span>{{ feature }}</span>
+      <!-- Right: Info -->
+      <div class="lg:col-span-5 flex flex-col gap-5">
+        <!-- Title -->
+        <h1 class="text-2xl lg:text-3xl font-bold text-highlighted">
+          {{ yacht.title }}
+        </h1>
+
+        <!-- Specs 2x2 grid -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex items-center gap-2.5 rounded-lg bg-muted/50 px-3 py-2.5">
+            <UIcon name="i-lucide-sailboat" class="size-4 text-primary shrink-0" />
+            <div class="min-w-0">
+              <p class="text-xs text-muted">Тип</p>
+              <p class="text-sm font-medium text-highlighted truncate">{{ yacht.type }}</p>
+            </div>
           </div>
-        </UCard>
-      </div>
-    </UPageSection>
 
-    <UPageSection v-reveal :ui="{ container: 'px-0' }">
-      <UPageCTA
-        title="Готовы выйти в море?"
-        :description="`Арендуйте «${yacht.title}» прямо сейчас и наш менеджер свяжется с вами.`"
-        variant="subtle"
-        orientation="horizontal"
-        class="rounded-none sm:rounded-xl"
-        :links="[
-          { label: 'Арендовать', icon: 'i-lucide-calendar-check', size: 'lg' as const, onClick: () => { bookingModal = true } },
-          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.phoneHref },
-          { label: 'Telegram', icon: 'i-simple-icons-telegram', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.telegramLink, target: '_blank' }
-        ]"
-      >
-        <NuxtImg
-          :src="yacht.image"
-          :alt="yacht.title"
-          class="w-full rounded-lg"
-          loading="lazy"
-        />
-      </UPageCTA>
-    </UPageSection>
+          <div class="flex items-center gap-2.5 rounded-lg bg-muted/50 px-3 py-2.5">
+            <UIcon name="i-lucide-users" class="size-4 text-primary shrink-0" />
+            <div class="min-w-0">
+              <p class="text-xs text-muted">Вместимость</p>
+              <p class="text-sm font-medium text-highlighted">до {{ yacht.capacity }} чел.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5 rounded-lg bg-muted/50 px-3 py-2.5">
+            <UIcon name="i-lucide-ruler" class="size-4 text-primary shrink-0" />
+            <div class="min-w-0">
+              <p class="text-xs text-muted">Длина</p>
+              <p class="text-sm font-medium text-highlighted">{{ yacht.length }}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5 rounded-lg bg-muted/50 px-3 py-2.5">
+            <UIcon name="i-lucide-tag" class="size-4 text-primary shrink-0" />
+            <div class="min-w-0">
+              <p class="text-xs text-muted">Стоимость</p>
+              <p class="text-sm font-semibold text-highlighted">{{ yacht.pricePerHour.toLocaleString('ru-RU') }} ₽/час</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="text-sm text-muted leading-relaxed">
+          {{ yacht.fullDescription }}
+        </p>
+
+        <!-- Features -->
+        <div v-if="yacht.features.length">
+          <h2 class="text-sm font-semibold text-highlighted mb-2">На борту</h2>
+          <ul class="space-y-1.5">
+            <li
+              v-for="(feature, index) in yacht.features"
+              :key="index"
+              class="flex items-start gap-2 text-sm text-muted"
+            >
+              <UIcon name="i-lucide-check" class="size-4 text-primary shrink-0 mt-0.5" />
+              <span>{{ feature }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <UButton
+            label="Арендовать"
+            icon="i-lucide-calendar-check"
+            size="lg"
+            @click="bookingModal = true"
+          />
+          <UButton
+            label="Позвонить"
+            icon="i-lucide-phone"
+            variant="soft"
+            color="neutral"
+            size="lg"
+            :to="contacts.phoneHref"
+          />
+          <UButton
+            label="Telegram"
+            icon="i-simple-icons-telegram"
+            variant="soft"
+            color="neutral"
+            size="lg"
+            :to="contacts.telegramLink"
+            target="_blank"
+          />
+        </div>
+      </div>
+    </div>
 
     <BookingModal
       v-model="bookingModal"

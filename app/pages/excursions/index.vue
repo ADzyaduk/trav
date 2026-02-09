@@ -46,14 +46,14 @@ function handleBook(excursion: Excursion) {
     </UPageHero>
 
     <UPageSection v-reveal>
-      <UPageGrid>
+      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 items-stretch">
         <ExcursionCard
           v-for="excursion in store.excursions"
           :key="excursion.id"
           :excursion="excursion"
           @book="handleBook"
         />
-      </UPageGrid>
+      </div>
     </UPageSection>
 
     <BookingModal

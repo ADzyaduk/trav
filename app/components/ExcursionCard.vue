@@ -22,26 +22,26 @@ const emit = defineEmits<{
         <NuxtImg :src="props.excursion.image" :alt="props.excursion.title" class="w-full aspect-16/10 object-cover"
           loading="lazy" />
       </div>
-      <div class="flex items-center justify-between mt-4">
-        <h2 class="text-lg font-semibold">
+      <div class="flex items-center justify-between gap-2 mt-4 min-h-[2.75rem]">
+        <h2 class="text-lg font-semibold line-clamp-2 flex-1 min-w-0">
           {{ props.excursion.title }}
         </h2>
-        <UBadge variant="subtle">
+        <UBadge variant="subtle" class="shrink-0">
           {{ props.excursion.city }}
         </UBadge>
       </div>
     </template>
 
-    <p class="text-muted text-sm flex-1">
+    <p class="text-muted text-sm line-clamp-4 min-h-[5.25rem]">
       {{ props.excursion.description }}
     </p>
 
-    <div class="mt-4 flex items-center gap-3 text-sm text-muted">
+    <div class="mt-4 flex items-center justify-between text-sm text-muted">
       <span class="flex items-center gap-1">
         <UIcon name="i-lucide-clock" class="size-4" />
         {{ props.excursion.duration }}
       </span>
-      <span class="font-semibold text-highlighted text-base">
+      <span class="font-semibold text-primary text-base">
         {{ props.excursion.price.toLocaleString('ru-RU') }} ₽
       </span>
     </div>
