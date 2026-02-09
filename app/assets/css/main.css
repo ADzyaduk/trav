@@ -1,2 +1,86 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+/* Scroll reveal animation */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children animation */
+.scroll-reveal-visible > :nth-child(1) { transition-delay: 0ms; }
+.scroll-reveal-visible > :nth-child(2) { transition-delay: 60ms; }
+.scroll-reveal-visible > :nth-child(3) { transition-delay: 120ms; }
+.scroll-reveal-visible > :nth-child(4) { transition-delay: 180ms; }
+.scroll-reveal-visible > :nth-child(5) { transition-delay: 240ms; }
+
+/* Hero fade-in animation */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  animation: hero-fade-in 0.6s ease-out both;
+}
+
+/* Slow zoom for hero background */
+@keyframes hero-bg-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.hero-bg-zoom {
+  animation: hero-bg-zoom 20s ease-in-out infinite alternate;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-animate {
+    animation: none;
+  }
+
+  .hero-bg-zoom {
+    animation: none;
+  }
+}
+
+/* Page fade transition (between routes) */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s ease-out;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+}

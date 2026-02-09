@@ -11,10 +11,11 @@ useHead({
 
 useSeoMeta({
   title: 'Экскурсии — TravelSite',
-  description: 'Лучшие экскурсии по городам мира: Стамбул, Анталья, Каппадокия, Дубай и другие направления.'
+  description: 'ТОП-15 самых популярных экскурсий Сочи 2026: Красная Поляна, Абхазия, гора Ахун, 33 водопада, дельфины и другие.'
 })
 
 const store = useServicesStore()
+const contacts = useContacts()
 
 const bookingModal = ref(false)
 const bookingService = ref<{ type: 'excursion' | 'yacht', title: string }>()
@@ -28,11 +29,12 @@ function handleBook(excursion: Excursion) {
 <template>
   <div>
     <UPageHero
-      title="Экскурсии"
-      description="Увлекательные экскурсии по самым красивым городам и местам мира. Выбирайте направление и отправляйтесь в путешествие!"
+      title="Экскурсии по Сочи"
+      description="ТОП-15 самых популярных экскурсий Сочи 2026. Красная Поляна, Абхазия, гора Ахун, морские прогулки с дельфинами и многое другое."
       orientation="horizontal"
       :links="[
-        { label: 'Позвонить', icon: 'i-lucide-phone', to: 'tel:+79001234567', size: 'xl' as const }
+        { label: 'Позвонить', icon: 'i-lucide-phone', to: contacts.phoneHref, size: 'xl' as const },
+        { label: 'Telegram', icon: 'i-simple-icons-telegram', to: contacts.telegramLink, target: '_blank', variant: 'soft' as const, color: 'neutral' as const, size: 'xl' as const }
       ]"
     >
       <NuxtImg
@@ -43,7 +45,7 @@ function handleBook(excursion: Excursion) {
       />
     </UPageHero>
 
-    <UPageSection>
+    <UPageSection v-reveal>
       <UPageGrid>
         <ExcursionCard
           v-for="excursion in store.excursions"

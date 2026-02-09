@@ -19,6 +19,7 @@ useHead({
   title: () => excursion.value ? `${excursion.value.title} — TravelSite` : 'Экскурсия — TravelSite'
 })
 
+const contacts = useContacts()
 const bookingModal = ref(false)
 
 const galleryImages = computed(() => excursion.value?.images ?? [excursion.value!.image])
@@ -35,11 +36,11 @@ const galleryImages = computed(() => excursion.value?.images ?? [excursion.value
       ]"
     />
 
-    <UPageSection headline="Галерея" title="Фотографии">
+    <UPageSection v-reveal headline="Галерея" title="Фотографии">
       <ImageCarousel :images="galleryImages" :alt="excursion.title" />
     </UPageSection>
 
-    <UPageSection headline="Детали" title="Информация">
+    <UPageSection v-reveal headline="Детали" title="Информация">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <UCard>
           <div class="flex items-center gap-3">
@@ -66,7 +67,7 @@ const galleryImages = computed(() => excursion.value?.images ?? [excursion.value
             <UIcon name="i-lucide-dollar-sign" class="size-5 text-primary" />
             <div>
               <p class="text-sm text-muted">Стоимость</p>
-              <p class="font-medium">{{ excursion.price }} $</p>
+              <p class="font-medium">{{ excursion.price.toLocaleString('ru-RU') }} ₽</p>
             </div>
           </div>
         </UCard>
@@ -83,7 +84,7 @@ const galleryImages = computed(() => excursion.value?.images ?? [excursion.value
       </div>
     </UPageSection>
 
-    <UPageSection headline="Что вас ждёт" title="Основные моменты">
+    <UPageSection v-reveal headline="Что вас ждёт" title="Основные моменты">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <UCard v-for="(highlight, index) in excursion.highlights" :key="index">
           <div class="flex items-center gap-3">
@@ -94,7 +95,7 @@ const galleryImages = computed(() => excursion.value?.images ?? [excursion.value
       </div>
     </UPageSection>
 
-    <UPageSection :ui="{ container: 'px-0' }">
+    <UPageSection v-reveal :ui="{ container: 'px-0' }">
       <UPageCTA
         title="Готовы к этой экскурсии?"
         :description="`Забронируйте «${excursion.title}» прямо сейчас и наш менеджер свяжется с вами.`"
@@ -103,7 +104,8 @@ const galleryImages = computed(() => excursion.value?.images ?? [excursion.value
         class="rounded-none sm:rounded-xl"
         :links="[
           { label: 'Забронировать', icon: 'i-lucide-calendar-check', size: 'lg' as const, onClick: () => { bookingModal = true } },
-          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: 'tel:+79001234567' }
+          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.phoneHref },
+          { label: 'Telegram', icon: 'i-simple-icons-telegram', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.telegramLink, target: '_blank' }
         ]"
       >
         <NuxtImg

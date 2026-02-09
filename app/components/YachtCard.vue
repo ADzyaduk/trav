@@ -16,16 +16,16 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <UCard class="h-full flex flex-col overflow-hidden">
+  <UCard class="h-full flex flex-col overflow-hidden transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lg">
     <template #header>
       <div class="-mx-[calc(var(--ui-card-body-padding)+1px)] -mt-[calc(var(--ui-card-body-padding)+1px)]">
         <NuxtImg :src="props.yacht.image" :alt="props.yacht.title" class="w-full aspect-16/10 object-cover"
           loading="lazy" />
       </div>
       <div class="flex items-center justify-between mt-4">
-        <h3 class="text-lg font-semibold">
+        <h2 class="text-lg font-semibold">
           {{ props.yacht.title }}
-        </h3>
+        </h2>
         <UBadge variant="subtle" color="secondary">
           {{ props.yacht.type }}
         </UBadge>

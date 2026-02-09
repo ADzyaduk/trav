@@ -15,6 +15,7 @@ useSeoMeta({
 })
 
 const store = useServicesStore()
+const contacts = useContacts()
 
 const bookingModal = ref(false)
 const bookingService = ref<{ type: 'excursion' | 'yacht', title: string }>()
@@ -37,7 +38,8 @@ function handleBookGroupTrip(trip: GroupTrip) {
       description="Моторные и парусные яхты для любого случая — от романтических прогулок до VIP-мероприятий. Выбирайте яхту и отправляйтесь в морское приключение!"
       orientation="horizontal"
       :links="[
-        { label: 'Позвонить', icon: 'i-lucide-phone', to: 'tel:+79001234567', size: 'xl' as const }
+        { label: 'Позвонить', icon: 'i-lucide-phone', to: contacts.phoneHref, size: 'xl' as const },
+        { label: 'Telegram', icon: 'i-simple-icons-telegram', to: contacts.telegramLink, target: '_blank', variant: 'soft' as const, color: 'neutral' as const, size: 'xl' as const }
       ]"
     >
       <NuxtImg
@@ -48,7 +50,7 @@ function handleBookGroupTrip(trip: GroupTrip) {
       />
     </UPageHero>
 
-    <UPageSection>
+    <UPageSection v-reveal>
       <UPageGrid>
         <YachtCard
           v-for="yacht in store.yachts"
@@ -60,6 +62,7 @@ function handleBookGroupTrip(trip: GroupTrip) {
     </UPageSection>
 
     <UPageSection
+      v-reveal
       headline="Групповые"
       title="Групповые поездки"
       description="Присоединяйтесь к группе — морские прогулки и рыбалка по доступной цене за билет."

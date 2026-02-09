@@ -15,6 +15,7 @@ useSeoMeta({
 })
 
 const store = useServicesStore()
+const contacts = useContacts()
 const bookingModal = ref(false)
 const bookingService = ref<{ type: 'excursion' | 'yacht', title: string }>()
 
@@ -45,15 +46,16 @@ function handleBookYacht(yacht: Yacht) {
       ]"
       :ui="{
         root: 'overflow-hidden',
-        title: 'text-white drop-shadow-lg',
-        description: 'text-white/90 drop-shadow-md',
+        title: 'text-white drop-shadow-lg hero-animate',
+        description: 'text-white/90 drop-shadow-md hero-animate [animation-delay:150ms]',
+        links: 'hero-animate [animation-delay:300ms]',
       }"
     >
       <template #top>
         <NuxtImg
           src="/images/hero/main.jpg"
           alt=""
-          class="absolute inset-0 w-full h-full object-cover -z-10"
+          class="absolute inset-0 w-full h-full object-cover -z-10 hero-bg-zoom"
           loading="eager"
         />
         <div class="absolute inset-0 bg-black/50 -z-10" />
@@ -62,6 +64,7 @@ function handleBookYacht(yacht: Yacht) {
 
     <!-- Services overview -->
     <UPageSection
+      v-reveal
       headline="Услуги"
       title="Что мы предлагаем"
       description="Выбирайте из лучших экскурсий и яхт для идеального отдыха."
@@ -88,6 +91,7 @@ function handleBookYacht(yacht: Yacht) {
 
     <!-- Popular excursions -->
     <UPageSection
+      v-reveal
       headline="Популярное"
       title="Топ экскурсии"
       description="Самые востребованные экскурсии нашего сервиса."
@@ -105,6 +109,7 @@ function handleBookYacht(yacht: Yacht) {
 
     <!-- Popular yachts -->
     <UPageSection
+      v-reveal
       headline="Флот"
       title="Наши яхты"
       description="Выбирайте яхту под любой случай и бюджет."
@@ -121,7 +126,7 @@ function handleBookYacht(yacht: Yacht) {
     </UPageSection>
 
     <!-- CTA -->
-    <UPageSection :ui="{ container: 'px-0' }">
+    <UPageSection v-reveal :ui="{ container: 'px-0' }">
       <UPageCTA
         title="Готовы к приключению?"
         description="Оставьте заявку и наш менеджер свяжется с вами для организации идеального отдыха."
@@ -130,7 +135,8 @@ function handleBookYacht(yacht: Yacht) {
         class="rounded-none sm:rounded-xl"
         :links="[
           { label: 'Забронировать', icon: 'i-lucide-calendar-check', size: 'lg' as const, onClick: () => { bookingService = undefined; bookingModal = true } },
-          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: 'tel:+79001234567' }
+          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.phoneHref },
+          { label: 'Telegram', icon: 'i-simple-icons-telegram', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.telegramLink, target: '_blank' }
         ]"
       >
         <NuxtImg

@@ -19,6 +19,7 @@ useHead({
   title: () => yacht.value ? `${yacht.value.title} — TravelSite` : 'Яхта — TravelSite'
 })
 
+const contacts = useContacts()
 const bookingModal = ref(false)
 
 const galleryImages = computed(() => yacht.value?.images ?? [yacht.value!.image])
@@ -35,11 +36,11 @@ const galleryImages = computed(() => yacht.value?.images ?? [yacht.value!.image]
       ]"
     />
 
-    <UPageSection headline="Галерея" title="Фотографии">
+    <UPageSection v-reveal headline="Галерея" title="Фотографии">
       <ImageCarousel :images="galleryImages" :alt="yacht.title" />
     </UPageSection>
 
-    <UPageSection headline="Характеристики" title="О яхте">
+    <UPageSection v-reveal headline="Характеристики" title="О яхте">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <UCard>
           <div class="flex items-center gap-3">
@@ -83,7 +84,7 @@ const galleryImages = computed(() => yacht.value?.images ?? [yacht.value!.image]
       </div>
     </UPageSection>
 
-    <UPageSection headline="На борту" title="Удобства и оснащение">
+    <UPageSection v-reveal headline="На борту" title="Удобства и оснащение">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <UCard v-for="(feature, index) in yacht.features" :key="index">
           <div class="flex items-center gap-3">
@@ -94,7 +95,7 @@ const galleryImages = computed(() => yacht.value?.images ?? [yacht.value!.image]
       </div>
     </UPageSection>
 
-    <UPageSection :ui="{ container: 'px-0' }">
+    <UPageSection v-reveal :ui="{ container: 'px-0' }">
       <UPageCTA
         title="Готовы выйти в море?"
         :description="`Арендуйте «${yacht.title}» прямо сейчас и наш менеджер свяжется с вами.`"
@@ -103,7 +104,8 @@ const galleryImages = computed(() => yacht.value?.images ?? [yacht.value!.image]
         class="rounded-none sm:rounded-xl"
         :links="[
           { label: 'Арендовать', icon: 'i-lucide-calendar-check', size: 'lg' as const, onClick: () => { bookingModal = true } },
-          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: 'tel:+79001234567' }
+          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.phoneHref },
+          { label: 'Telegram', icon: 'i-simple-icons-telegram', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.telegramLink, target: '_blank' }
         ]"
       >
         <NuxtImg

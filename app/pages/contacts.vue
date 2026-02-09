@@ -11,9 +11,10 @@ useHead({
 
 useSeoMeta({
   title: 'Контакты — TravelSite',
-  description: 'Свяжитесь с нами: телефон, форма обратной связи, заказ звонка.'
+  description: 'Свяжитесь с нами: телефон, Telegram, MAX, форма обратной связи.'
 })
 
+const contacts = useContacts()
 const toast = useToast()
 const loading = ref(false)
 
@@ -68,72 +69,80 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
 
 <template>
   <div>
-    <UPageSection>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <UPageSection v-reveal>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         <!-- Левая колонка — контакты -->
         <UCard>
           <template #header>
-            <h2 class="text-xl font-bold">Наши контакты</h2>
+            <div>
+              <h2 class="text-xl font-bold">Наши контакты</h2>
+              <p class="text-sm text-muted mt-1">Позвоните или напишите в мессенджер — ответим в ближайшее время</p>
+            </div>
           </template>
 
-          <div class="space-y-4">
+          <div class="space-y-3">
             <div class="flex items-center gap-4">
-              <div class="flex items-center justify-center size-12 rounded-lg bg-primary/10 shrink-0">
-                <UIcon name="i-lucide-phone" class="size-6 text-primary" />
+              <div class="flex items-center justify-center size-11 rounded-lg bg-primary/10 shrink-0">
+                <UIcon name="i-lucide-phone" class="size-5 text-primary" />
               </div>
               <div>
                 <p class="text-sm text-muted">Телефон</p>
                 <UButton
                   variant="link"
-                  to="tel:+79001234567"
+                  :to="contacts.phoneHref"
                   :padded="false"
-                  class="text-lg font-semibold"
+                  class="text-base font-semibold"
                 >
-                  +7 (900) 123-45-67
+                  {{ contacts.phoneFormatted }}
                 </UButton>
               </div>
             </div>
 
             <div class="flex items-center gap-4">
-              <div class="flex items-center justify-center size-12 rounded-lg bg-primary/10 shrink-0">
-                <UIcon name="i-lucide-clock" class="size-6 text-primary" />
+              <div class="flex items-center justify-center size-11 rounded-lg bg-primary/10 shrink-0">
+                <UIcon name="i-simple-icons-telegram" class="size-5 text-primary" />
+              </div>
+              <div>
+                <p class="text-sm text-muted">Telegram</p>
+                <UButton
+                  variant="link"
+                  :to="contacts.telegramLink"
+                  target="_blank"
+                  :padded="false"
+                  class="text-base font-semibold"
+                >
+                  {{ contacts.telegramUsername }}
+                </UButton>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="flex items-center justify-center size-11 rounded-lg bg-primary/10 shrink-0">
+                <img :src="contacts.maxLogo" alt="MAX" class="size-5">
+              </div>
+              <div>
+                <p class="text-sm text-muted">MAX</p>
+                <UButton
+                  variant="link"
+                  :to="contacts.maxLink"
+                  target="_blank"
+                  :padded="false"
+                  class="text-base font-semibold"
+                >
+                  Написать в MAX
+                </UButton>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="flex items-center justify-center size-11 rounded-lg bg-primary/10 shrink-0">
+                <UIcon name="i-lucide-clock" class="size-5 text-primary" />
               </div>
               <div>
                 <p class="text-sm text-muted">Время работы</p>
-                <p class="text-lg font-semibold">Ежедневно, 09:00 — 21:00</p>
+                <p class="text-base font-semibold">Ежедневно, 09:00 — 21:00</p>
               </div>
             </div>
-
-            <div class="flex items-center gap-4">
-              <div class="flex items-center justify-center size-12 rounded-lg bg-primary/10 shrink-0">
-                <UIcon name="i-lucide-mail" class="size-6 text-primary" />
-              </div>
-              <div>
-                <p class="text-sm text-muted">E-mail</p>
-                <UButton
-                  variant="link"
-                  to="mailto:info@travelsite.com"
-                  :padded="false"
-                  class="text-lg font-semibold"
-                >
-                  info@travelsite.com
-                </UButton>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-4">
-              <div class="flex items-center justify-center size-12 rounded-lg bg-primary/10 shrink-0">
-                <UIcon name="i-lucide-map-pin" class="size-6 text-primary" />
-              </div>
-              <div>
-                <p class="text-sm text-muted">Адрес</p>
-                <p class="text-lg font-semibold">г. Анталья, Турция</p>
-              </div>
-            </div>
-
-            <p class="text-sm text-muted mt-2">
-              Неудобно звонить? Заполните форму справа — мы сами вам перезвоним.
-            </p>
           </div>
         </UCard>
 
