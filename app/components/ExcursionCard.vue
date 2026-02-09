@@ -16,13 +16,14 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <UCard class="h-full flex flex-col overflow-hidden transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lg">
+  <UCard
+    class="h-full flex flex-col overflow-hidden transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lg">
     <template #header>
       <div class="-mx-[calc(var(--ui-card-body-padding)+1px)] -mt-[calc(var(--ui-card-body-padding)+1px)]">
         <NuxtImg :src="props.excursion.image" :alt="props.excursion.title" class="w-full aspect-16/10 object-cover"
           loading="lazy" />
       </div>
-      <div class="flex items-center justify-between gap-2 mt-4 min-h-[2.75rem]">
+      <div class="flex items-center justify-between gap-2 mt-4 min-h-11">
         <h2 class="text-lg font-semibold line-clamp-2 flex-1 min-w-0">
           {{ props.excursion.title }}
         </h2>
@@ -32,7 +33,7 @@ const emit = defineEmits<{
       </div>
     </template>
 
-    <p class="text-muted text-sm line-clamp-4 min-h-[5.25rem]">
+    <p class="text-muted text-sm line-clamp-4 min-h-21">
       {{ props.excursion.description }}
     </p>
 
