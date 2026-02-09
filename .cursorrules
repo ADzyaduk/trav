@@ -1,0 +1,201 @@
+This project follows a Nuxt-first and Nuxt UI-first approach.
+Custom solutions are a last resort.
+
+You are an AI coding assistant working inside a Nuxt 4 project.
+
+You MUST always think in terms of Nuxt conventions, Nuxt modules, and Nuxt UI.
+Do not suggest generic Vue, Vite, or Tailwind-only solutions if a Nuxt-native or Nuxt UI solution exists.
+
+────────────────────────
+Core Stack & Expertise
+────────────────────────
+- Nuxt 4
+- Vue 3
+- TypeScript
+- Composition API with <script setup>
+- Pinia
+- VueUse
+- Nuxt UI v4.4.0
+- Tailwind CSS
+
+Primary goal:
+- Build a production-ready website
+- Keep architecture compatible with future Telegram Mini App adaptation
+
+────────────────────────
+Nuxt UI — Mandatory Usage
+────────────────────────
+Nuxt UI v4.4.0 is the primary UI layer of this project.
+
+ALWAYS check Nuxt UI components before creating custom UI.
+If a Nuxt UI component exists, it MUST be used.
+
+Do NOT manually recreate common UI patterns.
+
+Mandatory Nuxt UI components include (but are not limited to):
+
+Layout & App structure:
+- App, Container, Header, Footer, Main, Error
+
+Hero & Page sections:
+- PageHero, PageHeader, PageSection, PageGrid
+- PageCard, PageCTA, PageFeature
+- PricingPlans, PricingTable
+
+UI elements:
+- Button, Card, Badge, Alert, Avatar, Banner
+- Skeleton, Progress, Separator, Chip
+
+Navigation:
+- NavigationMenu, Breadcrumb, Tabs
+- Pagination, Stepper, Link
+
+Forms:
+- Form, FormField
+- Input, Textarea, Select, SelectMenu
+- Checkbox, RadioGroup, Switch, Slider
+- FileUpload, InputTags
+
+Data display:
+- Table, Accordion, Carousel
+- Timeline, Tree, User, Marquee
+
+Overlay & feedback:
+- Modal, Drawer, DropdownMenu
+- Popover, Tooltip, Toast
+- ContextMenu, Slideover
+
+Color mode & utilities:
+- ColorModeButton, ColorModeSwitch, ColorModeImage
+
+Internationalization:
+- LocaleSelect
+
+Custom UI components are allowed ONLY when:
+- Nuxt UI does not provide an equivalent
+- or very specific customization is required
+
+When customization is needed:
+- Extend or compose Nuxt UI components
+- Do NOT replace them with raw HTML
+
+────────────────────────
+Code Style & Structure
+────────────────────────
+- Write clean, maintainable, technically correct TypeScript
+- Prefer functional and declarative patterns
+- Do NOT use classes
+- Follow DRY principles
+- Keep components small and focused
+- Use composables for reusable logic
+- Favor iteration and modularization
+
+────────────────────────
+Nuxt Conventions
+────────────────────────
+- Use file-based routing only
+- Use layouts for global structure
+- Use definePageMeta for page configuration
+- Rely on Nuxt auto-imports (ref, computed, useRoute, useRouter, useState, etc.)
+- Use useHead and useSeoMeta for SEO
+- Use useRuntimeConfig for environment variables
+- Use app.config.ts for theme and app-level config
+- Prefer Nuxt modules over external libraries
+
+────────────────────────
+State Management
+────────────────────────
+- Prefer local component state
+- Use Pinia only for shared or persistent state
+- Keep stores simple and flat
+- Avoid global state unless clearly necessary
+
+────────────────────────
+Data Fetching Rules
+────────────────────────
+1. Use useFetch for SSR-friendly data fetching
+2. Use $fetch for client-side requests or event handlers
+3. Use useAsyncData for complex or combined requests
+4. Set server: false for client-only fetching
+5. Use lazy: true for non-critical data
+
+────────────────────────
+VueUse
+────────────────────────
+- Prefer VueUse composables for reactivity and utilities
+- Do NOT use VueUse for color mode
+- Use @nuxtjs/color-mode and useColorMode() instead
+
+────────────────────────
+Styling Rules
+────────────────────────
+- Use Nuxt UI components first
+- Style with Tailwind CSS (mobile-first)
+- Avoid scoped CSS unless necessary
+- No inline styles
+
+────────────────────────
+TypeScript Rules
+────────────────────────
+- Use TypeScript everywhere
+- Prefer interfaces over types
+- Avoid enums; use objects or maps instead
+- Use typed props and composables
+- Favor named exports
+
+────────────────────────
+Naming Conventions
+────────────────────────
+- Composables: useSomething
+- Components: PascalCase.vue
+- Clear, explicit naming over short names
+
+────────────────────────
+Future Telegram Mini App Compatibility
+────────────────────────
+- Avoid hard dependency on browser-only APIs
+- Guard window/document usage with process.client
+- Avoid full page reload assumptions
+- Prefer SPA-friendly and modal-based UX
+- Keep platform-specific logic inside composables
+- UI must work inside iframe / WebView
+
+────────────────────────
+What NOT to Do
+────────────────────────
+- No React patterns
+- No Options API
+- No class-based components
+- No rebuilding Nuxt UI components manually
+- No unnecessary external libraries
+- No breaking Nuxt conventions
+- No premature optimization
+
+────────────────────────
+MCP — Before Creating Anything
+────────────────────────
+Before implementing components, pages, features, or integrations:
+
+1. MCP Nuxt
+   - Use list_documentation_pages / get_documentation_page for Nuxt conventions and APIs
+   - Use list_modules / get_module for Nuxt modules and compatibility
+   - Use list_blog_posts / get_blog_post when relevant to recent changes or features
+
+2. MCP Nuxt UI
+   - Use list_components / get_component or search_components_by_category for UI components
+   - Use get_component_metadata, get_example for props, slots, and usage
+   - Use list_documentation_pages / get_documentation_page for Nuxt UI patterns
+
+3. MCP Context7
+   - Use resolve-library-id then query-docs for up-to-date docs of Nuxt, Vue, or other libraries
+   - Prefer Context7 when you need current API details or code examples for dependencies
+
+Do NOT create or suggest implementations without checking these MCP sources first when the task involves Nuxt, Nuxt UI, or external libraries.
+
+────────────────────────
+When Responding
+────────────────────────
+- Prefer simple, practical solutions
+- Explain decisions briefly when important
+- Always consider Nuxt UI and Nuxt conventions first
+- Consult MCP (Nuxt, Nuxt UI, Context7) before creating new code
