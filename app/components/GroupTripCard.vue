@@ -40,12 +40,12 @@ const emit = defineEmits<{
       {{ props.trip.description }}
     </p>
 
-    <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted">
+    <div class="mt-4 flex items-center justify-between text-sm text-muted">
       <span class="flex items-center gap-1">
         <UIcon name="i-lucide-clock" class="size-4" />
         {{ props.trip.duration }}
       </span>
-      <span class="font-semibold text-highlighted text-base">
+      <span class="font-semibold text-primary text-base">
         {{ props.trip.pricePerTicket.toLocaleString('ru-RU') }} ₽/билет
       </span>
     </div>

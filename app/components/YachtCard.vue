@@ -36,16 +36,18 @@ const emit = defineEmits<{
       {{ props.yacht.description }}
     </p>
 
-    <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted">
-      <span class="flex items-center gap-1">
-        <UIcon name="i-lucide-users" class="size-4" />
-        до {{ props.yacht.capacity }} чел.
-      </span>
-      <span class="flex items-center gap-1">
-        <UIcon name="i-lucide-ruler" class="size-4" />
-        {{ props.yacht.length }}
-      </span>
-      <span class="font-semibold text-highlighted text-base">
+    <div class="mt-4 flex items-center justify-between text-sm text-muted">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1">
+          <UIcon name="i-lucide-users" class="size-4" />
+          до {{ props.yacht.capacity }} чел.
+        </span>
+        <span class="flex items-center gap-1">
+          <UIcon name="i-lucide-ruler" class="size-4" />
+          {{ props.yacht.length }}
+        </span>
+      </div>
+      <span class="font-semibold text-primary text-base">
         {{ props.yacht.pricePerHour }} $/час
       </span>
     </div>
