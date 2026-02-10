@@ -52,23 +52,25 @@ const footerNavItems: NavigationMenuItem[] = [
     <UNavigationMenu :items="navigationItems" aria-label="Основная навигация" />
 
     <template #right>
+      <!-- Desktop phone: gray by default, green on hover -->
       <UButton
         icon="i-lucide-phone"
-        color="primary"
+        color="neutral"
         variant="ghost"
         :to="contacts.phoneHref"
         aria-label="Позвонить"
-        class="hidden sm:inline-flex"
+        class="hidden sm:inline-flex text-neutral-500 hover:text-emerald-500"
       />
 
+      <!-- Desktop Telegram: colored Telegram icon -->
       <UButton
         icon="i-simple-icons-telegram"
-        color="primary"
+        color="neutral"
         variant="ghost"
         :to="contacts.telegramLink"
         target="_blank"
         aria-label="Написать в Telegram"
-        class="hidden sm:inline-flex"
+        class="hidden sm:inline-flex text-[#27A4E7] hover:text-[#1C8CD8]"
       />
 
       <UButton
@@ -137,13 +139,16 @@ const footerNavItems: NavigationMenuItem[] = [
 
     <template #right>
       <div class="flex items-center gap-1">
+        <!-- Footer phone: gray by default, green on hover -->
         <UButton
           icon="i-lucide-phone"
           color="neutral"
           variant="ghost"
           :to="contacts.phoneHref"
           aria-label="Позвонить"
+          class="text-neutral-500 hover:text-emerald-500"
         />
+        <!-- Footer Telegram: colored Telegram icon -->
         <UButton
           icon="i-simple-icons-telegram"
           color="neutral"
@@ -151,6 +156,7 @@ const footerNavItems: NavigationMenuItem[] = [
           :to="contacts.telegramLink"
           target="_blank"
           aria-label="Написать в Telegram"
+          class="text-[#27A4E7] hover:text-[#1C8CD8]"
         />
         <UButton
           color="neutral"

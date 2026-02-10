@@ -46,13 +46,18 @@ function handleBook(excursion: Excursion) {
     </UPageHero>
 
     <UPageSection v-reveal>
-      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 items-stretch">
-        <ExcursionCard
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 items-stretch">
+        <div
           v-for="excursion in store.excursions"
           :key="excursion.id"
-          :excursion="excursion"
-          @book="handleBook"
-        />
+          :class="[excursion.isFeatured && 'sm:col-span-2']"
+        >
+          <ExcursionCard
+            :excursion="excursion"
+            :featured="excursion.isFeatured"
+            @book="handleBook"
+          />
+        </div>
       </div>
     </UPageSection>
 

@@ -2,6 +2,7 @@ import type { Excursion, GroupTrip, Yacht } from '~/types'
 
 export const useServicesStore = defineStore('services', () => {
   const excursions = ref<Excursion[]>([
+    // Featured #1 — занимает всю строку
     {
       id: 'krasnaya-polyana-rosa-hutor',
       title: 'Красная Поляна, Роза Хутор и Олимпийский парк',
@@ -12,20 +13,11 @@ export const useServicesStore = defineStore('services', () => {
       price: 3500,
       image: '/images/excursions/kotor.jpg',
       images: ['/images/excursions/kotor.jpg'],
-      highlights: ['Автобус с кондиционером', 'Профессиональный гид', 'Все канатные дороги', 'Шоу фонтанов']
+      highlights: ['Автобус с кондиционером', 'Профессиональный гид', 'Все канатные дороги', 'Шоу фонтанов'],
+      isFeatured: true,
+      featuredLabel: 'Топ выбор'
     },
-    {
-      id: 'abhaziya-zolotoe-koltso',
-      title: 'Абхазия — Золотое кольцо (Гагра, Рица, Новый Афон)',
-      city: 'Сочи',
-      description: 'Классическое путешествие по Абхазии за один день: Гагра, водопады «Девичьи слёзы» и «Мужские слёзы», Голубое озеро, озеро Рица, Новый Афон с монастырём и пещерой.',
-      fullDescription: 'Классическое путешествие по Абхазии за один день! Город Гагра с его парком и колоннадой. Водопады «Девичьи слёзы» и «Мужские слёзы». Голубое озеро. Озеро Рица — главное чудо региона. Новый Афон с его монастырём и подземной пещерой.',
-      duration: '12–14 часов',
-      price: 3200,
-      image: '/images/excursions/kotor.jpg',
-      images: ['/images/excursions/kotor.jpg'],
-      highlights: ['Автобус с кондиционером', 'Профессиональный гид', 'Переводчик на границе', 'Входы в пещеру и монастырь']
-    },
+    // Пара обычных — по 2 в строку
     {
       id: 'sochi-gora-ahun',
       title: 'Обзорная экскурсия «Сочи и гора Ахун»',
@@ -50,6 +42,22 @@ export const useServicesStore = defineStore('services', () => {
       images: ['/images/excursions/kotor.jpg'],
       highlights: ['Автобус с кондиционером', 'Профессиональный гид', 'Дегустация вина', 'Концерт адыгской музыки']
     },
+    // Featured #2 — занимает всю строку
+    {
+      id: 'abhaziya-zolotoe-koltso',
+      title: 'Абхазия — Золотое кольцо (Гагра, Рица, Новый Афон)',
+      city: 'Сочи',
+      description: 'Классическое путешествие по Абхазии за один день: Гагра, водопады «Девичьи слёзы» и «Мужские слёзы», Голубое озеро, озеро Рица, Новый Афон с монастырём и пещерой.',
+      fullDescription: 'Классическое путешествие по Абхазии за один день! Город Гагра с его парком и колоннадой. Водопады «Девичьи слёзы» и «Мужские слёзы». Голубое озеро. Озеро Рица — главное чудо региона. Новый Афон с его монастырём и подземной пещерой.',
+      duration: '12–14 часов',
+      price: 3200,
+      image: '/images/excursions/kotor.jpg',
+      images: ['/images/excursions/kotor.jpg'],
+      highlights: ['Автобус с кондиционером', 'Профессиональный гид', 'Переводчик на границе', 'Входы в пещеру и монастырь'],
+      isFeatured: true,
+      featuredLabel: 'Хит сезона'
+    },
+    // Ещё пары обычных — по 2 в строку
     {
       id: 'skajpark',
       title: 'Скайпарк (подвесные мосты, банджи, троллей)',
@@ -101,10 +109,31 @@ export const useServicesStore = defineStore('services', () => {
   ])
 
   const yachts = ref<Yacht[]>([
+    // Featured — занимает всю строку
+    {
+      id: 'royal-luxe-70',
+      title: 'Royal Luxe 70',
+      type: 'Люксовая яхта',
+      port: 'Порт Имеретинский',
+      capacity: 20,
+      length: '21.3 м',
+      description: 'Премиальная яхта для VIP-мероприятий и эксклюзивных морских путешествий.',
+      fullDescription: 'Royal Luxe 70 — флагман нашего флота. 21.3 метра роскоши: три каюты с ванными комнатами, джакузи на палубе, профессиональная кухня, бар и обеденная зона на 20 гостей. Экипаж из трёх человек к вашим услугам.',
+      pricePerHour: 450,
+      image: '/images/yachts/royal-luxe-70.jpg',
+      images: [
+        '/images/yachts/royal-luxe-70.jpg'
+      ],
+      features: ['3 каюты', 'Джакузи', 'Профессиональная кухня', 'Бар', 'Экипаж из 3 человек', 'Водные игрушки'],
+      isFeatured: true,
+      featuredLabel: 'Топ яхта'
+    },
+    // Обычные — по 2 в строку
     {
       id: 'azure-42',
       title: 'Azure 42',
       type: 'Моторная яхта',
+      port: 'Порт Сочи',
       capacity: 8,
       length: '12.8 м',
       description: 'Комфортная моторная яхта для дневных прогулок и небольших вечеринок.',
@@ -120,6 +149,7 @@ export const useServicesStore = defineStore('services', () => {
       id: 'sea-breeze-55',
       title: 'Sea Breeze 55',
       type: 'Парусная яхта',
+      port: 'Порт Имеретинский',
       capacity: 12,
       length: '16.7 м',
       description: 'Просторная парусная яхта для романтических прогулок и морских путешествий.',
@@ -130,21 +160,6 @@ export const useServicesStore = defineStore('services', () => {
         '/images/yachts/sea-breeze-55.jpg'
       ],
       features: ['2 каюты', 'Капитан включён', 'Полный набор парусов', 'Тендер', 'Рыболовное снаряжение']
-    },
-    {
-      id: 'royal-luxe-70',
-      title: 'Royal Luxe 70',
-      type: 'Люксовая яхта',
-      capacity: 20,
-      length: '21.3 м',
-      description: 'Премиальная яхта для VIP-мероприятий и эксклюзивных морских путешествий.',
-      fullDescription: 'Royal Luxe 70 — флагман нашего флота. 21.3 метра роскоши: три каюты с ванными комнатами, джакузи на палубе, профессиональная кухня, бар и обеденная зона на 20 гостей. Экипаж из трёх человек к вашим услугам.',
-      pricePerHour: 450,
-      image: '/images/yachts/royal-luxe-70.jpg',
-      images: [
-        '/images/yachts/royal-luxe-70.jpg'
-      ],
-      features: ['3 каюты', 'Джакузи', 'Профессиональная кухня', 'Бар', 'Экипаж из 3 человек', 'Водные игрушки']
     }
   ])
 

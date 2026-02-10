@@ -97,7 +97,7 @@ function handleBookYacht(yacht: Yacht) {
       description="Самые востребованные экскурсии нашего сервиса."
       :links="[{ label: 'Все экскурсии', to: '/excursions', variant: 'soft' as const, color: 'neutral' as const, trailingIcon: 'i-lucide-arrow-right' }]"
     >
-      <UPageGrid>
+      <UPageGrid class="items-stretch">
         <ExcursionCard
           v-for="excursion in store.popularExcursions"
           :key="excursion.id"
@@ -115,7 +115,7 @@ function handleBookYacht(yacht: Yacht) {
       description="Выбирайте яхту под любой случай и бюджет."
       :links="[{ label: 'Все яхты', to: '/yachts', variant: 'soft' as const, color: 'neutral' as const, trailingIcon: 'i-lucide-arrow-right' }]"
     >
-      <UPageGrid>
+      <UPageGrid class="items-stretch">
         <YachtCard
           v-for="yacht in store.popularYachts"
           :key="yacht.id"

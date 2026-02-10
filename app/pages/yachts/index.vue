@@ -51,14 +51,19 @@ function handleBookGroupTrip(trip: GroupTrip) {
     </UPageHero>
 
     <UPageSection v-reveal>
-      <UPageGrid>
-        <YachtCard
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 items-stretch">
+        <div
           v-for="yacht in store.yachts"
           :key="yacht.id"
-          :yacht="yacht"
-          @book="handleBook"
-        />
-      </UPageGrid>
+          :class="[yacht.isFeatured && 'sm:col-span-2']"
+        >
+          <YachtCard
+            :yacht="yacht"
+            :featured="yacht.isFeatured"
+            @book="handleBook"
+          />
+        </div>
+      </div>
     </UPageSection>
 
     <UPageSection
@@ -67,16 +72,7 @@ function handleBookGroupTrip(trip: GroupTrip) {
       title="Групповые поездки"
       description="Присоединяйтесь к группе — морские прогулки и рыбалка по доступной цене за билет."
     >
-      <UPageGrid
-        :class="[
-          'grid-cols-1 sm:grid-cols-2',
-          store.groupTrips.length === 3
-            ? 'lg:grid-cols-3'
-            : store.groupTrips.length === 1
-              ? 'lg:grid-cols-1'
-              : 'lg:grid-cols-2'
-        ]"
-      >
+      <UPageGrid class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
         <GroupTripCard
           v-for="trip in store.groupTrips"
           :key="trip.id"

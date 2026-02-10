@@ -9,12 +9,15 @@ export interface Excursion {
   image: string
   images?: string[]
   highlights: string[]
+  isFeatured?: boolean
+  featuredLabel?: string
 }
 
 export interface Yacht {
   id: string
   title: string
   type: string
+  port?: string
   capacity: number
   length: string
   description: string
@@ -23,6 +26,8 @@ export interface Yacht {
   image: string
   images?: string[]
   features: string[]
+  isFeatured?: boolean
+  featuredLabel?: string
 }
 
 export interface GroupTrip {
