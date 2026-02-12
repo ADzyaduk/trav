@@ -33,59 +33,33 @@ function handleBookGroupTrip(trip: GroupTrip) {
 
 <template>
   <div>
-    <UPageHero
-      title="Аренда яхт в Сочи"
+    <UPageHero title="Аренда яхт в Сочи"
       description="Моторные и парусные яхты в Порту Сочи и Порту Имеретинский — от романтических прогулок до VIP-мероприятий. Выбирайте яхту и отправляйтесь в морское приключение!"
-      orientation="horizontal"
-      :links="[
+      orientation="horizontal" :links="[
         { label: 'Позвонить', icon: 'i-lucide-phone', to: contacts.phoneHref, size: 'xl' as const },
         { label: 'Telegram', icon: 'i-simple-icons-telegram', to: contacts.telegramLink, target: '_blank', variant: 'soft' as const, color: 'neutral' as const, size: 'xl' as const }
-      ]"
-    >
-      <NuxtImg
-        src="/images/hero/yachts.jpg"
-        alt="Аренда яхт"
-        class="rounded-lg shadow-2xl ring ring-default w-full"
-        loading="lazy"
-      />
+      ]">
+      <NuxtImg src="/images/hero/yachts.jpg" alt="Аренда яхт" class="rounded-lg shadow-2xl ring ring-default w-full"
+        loading="lazy" />
     </UPageHero>
 
     <UPageSection v-reveal>
       <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 items-stretch">
-        <div
-          v-for="yacht in store.yachts"
-          :key="yacht.id"
-          :class="[yacht.isFeatured && 'sm:col-span-2']"
-        >
-          <YachtCard
-            :yacht="yacht"
-            :featured="yacht.isFeatured"
-            @book="handleBook"
-          />
+        <div v-for="yacht in store.yachts" :key="yacht.id" :class="[yacht.isFeatured && 'sm:col-span-2']">
+          <YachtCard :yacht="yacht" :featured="yacht.isFeatured" @book="handleBook" />
         </div>
       </div>
     </UPageSection>
 
-    <UPageSection
-      v-reveal
-      headline="Групповые"
-      title="Групповые поездки"
-      description="Присоединяйтесь к группе — морские прогулки и рыбалка по доступной цене за билет."
-    >
-      <UPageGrid class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
-        <GroupTripCard
-          v-for="trip in store.groupTrips"
-          :key="trip.id"
-          :trip="trip"
-          @book="handleBookGroupTrip"
-        />
-      </UPageGrid>
+    <UPageSection v-reveal headline="Групповые" title="Групповые поездки"
+      description="Присоединяйтесь к группе — морские прогулки и рыбалка по доступной цене за билет.">
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 items-stretch">
+        <div v-for="trip in store.groupTrips" :key="trip.id" :class="[trip.isFeatured && 'sm:col-span-2']">
+          <GroupTripCard :trip="trip" :featured="trip.isFeatured" @book="handleBookGroupTrip" />
+        </div>
+      </div>
     </UPageSection>
 
-    <BookingModal
-      v-model="bookingModal"
-      :service-type="bookingService?.type"
-      :service-title="bookingService?.title"
-    />
+    <BookingModal v-model="bookingModal" :service-type="bookingService?.type" :service-title="bookingService?.title" />
   </div>
 </template>

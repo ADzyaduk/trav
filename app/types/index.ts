@@ -37,9 +37,12 @@ export interface GroupTrip {
   fullDescription: string
   duration: string
   pricePerTicket: number
+  port?: string
   image: string
   images?: string[]
   highlights: string[]
+  isFeatured?: boolean
+  featuredLabel?: string
 }
 
 export interface BookingFormState {

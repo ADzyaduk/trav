@@ -26,83 +26,63 @@ const galleryImages = computed(() => trip.value?.images ?? [trip.value!.image])
 </script>
 
 <template>
-  <div v-if="trip">
-    <UPageHero
-      :title="trip.title"
-      :description="trip.fullDescription"
-      :links="[
-        { label: 'Забронировать', icon: 'i-lucide-calendar-check', onClick: () => { bookingModal = true } },
-        { label: 'Все яхты', to: '/yachts', variant: 'soft' as const, color: 'neutral' as const, icon: 'i-lucide-arrow-left' }
-      ]"
-    />
+  <div v-if="trip" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+    <NuxtLink to="/yachts"
+      class="inline-flex items-center gap-1.5 text-sm text-muted hover:text-highlighted transition-colors mb-4">
+      <UIcon name="i-lucide-arrow-left" class="size-4" />
+      Все яхты
+    </NuxtLink>
 
-    <UPageSection v-reveal headline="Галерея" title="Фотографии">
-      <ImageCarousel :images="galleryImages" :alt="trip.title" />
-    </UPageSection>
-
-    <UPageSection v-reveal headline="Детали" title="Информация">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-clock" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Длительность</p>
-              <p class="font-medium">{{ trip.duration }}</p>
-            </div>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-ticket" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Стоимость билета</p>
-              <p class="font-medium">{{ trip.pricePerTicket.toLocaleString('ru-RU') }} ₽</p>
-            </div>
-          </div>
-        </UCard>
-
-        <UCard>
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-users" class="size-5 text-primary" />
-            <div>
-              <p class="text-sm text-muted">Тип</p>
-              <p class="font-medium">Групповая поездка</p>
-            </div>
-          </div>
-        </UCard>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      <div class="lg:col-span-7 lg:sticky lg:top-20 lg:self-start">
+        <ImageCarousel :images="galleryImages" :alt="trip.title" />
       </div>
-    </UPageSection>
 
-    <UPageSection v-reveal headline="Что вас ждёт" title="Основные моменты">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <UCard v-for="(highlight, index) in trip.highlights" :key="index">
-          <div class="flex items-center gap-3">
-            <UIcon name="i-lucide-check-circle" class="size-5 text-primary shrink-0" />
-            <span>{{ highlight }}</span>
-          </div>
-        </UCard>
+      <div class="lg:col-span-5 flex flex-col gap-5">
+        <h1 class="text-2xl lg:text-3xl font-bold text-highlighted">
+          {{ trip.title }}
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+          <span class="inline-flex items-center gap-1.5">
+            <UIcon name="i-lucide-users" class="size-4 text-primary" />
+            Групповая поездка
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <UIcon name="i-lucide-clock" class="size-4 text-primary" />
+            {{ trip.duration }}
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-base font-semibold text-highlighted">
+            <UIcon name="i-lucide-tag" class="size-4 text-primary" />
+            {{ trip.pricePerTicket.toLocaleString('ru-RU') }} ₽/билет
+          </span>
+        </div>
+
+        <p class="text-sm text-muted leading-relaxed">
+          {{ trip.fullDescription }}
+        </p>
+
+        <div v-if="trip.highlights.length">
+          <h2 class="text-sm font-semibold text-highlighted mb-2">Что вас ждёт</h2>
+          <ul class="space-y-1.5">
+            <li v-for="(highlight, index) in trip.highlights" :key="index"
+              class="flex items-start gap-2 text-sm text-muted">
+              <UIcon name="i-lucide-check" class="size-4 text-primary shrink-0 mt-0.5" />
+              <span>{{ highlight }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-3 pt-2">
+          <UButton label="Забронировать" icon="i-lucide-calendar-check" size="lg" @click="bookingModal = true" />
+          <UButton label="Позвонить" icon="i-lucide-phone" variant="soft" color="neutral" size="lg"
+            :to="contacts.phoneHref" />
+          <UButton label="Telegram" icon="i-simple-icons-telegram" variant="soft" color="neutral" size="lg"
+            :to="contacts.telegramLink" target="_blank" />
+        </div>
       </div>
-    </UPageSection>
+    </div>
 
-    <UPageSection v-reveal :ui="{ container: 'px-0' }">
-      <UPageCTA
-        title="Присоединяйтесь к группе!"
-        :description="`Забронируйте билет на «${trip.title}» прямо сейчас и наш менеджер свяжется с вами.`"
-        variant="subtle"
-        class="rounded-none sm:rounded-xl"
-        :links="[
-          { label: 'Забронировать', icon: 'i-lucide-calendar-check', size: 'lg' as const, onClick: () => { bookingModal = true } },
-          { label: 'Позвонить', icon: 'i-lucide-phone', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.phoneHref },
-          { label: 'Telegram', icon: 'i-simple-icons-telegram', variant: 'soft' as const, color: 'neutral' as const, size: 'lg' as const, to: contacts.telegramLink, target: '_blank' }
-        ]"
-      />
-    </UPageSection>
-
-    <BookingModal
-      v-model="bookingModal"
-      service-type="yacht"
-      :service-title="trip.title"
-    />
+    <BookingModal v-model="bookingModal" service-type="yacht" :service-title="trip.title" />
   </div>
 </template>
