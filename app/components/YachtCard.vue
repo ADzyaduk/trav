@@ -70,7 +70,7 @@ const emit = defineEmits<{
           </span>
         </div>
         <span class="font-semibold text-primary text-lg">
-          {{ props.yacht.pricePerHour }} $/час
+          {{ props.yacht.pricePerHour.toLocaleString('ru-RU') }} ₽/час
         </span>
       </div>
 
@@ -130,7 +130,7 @@ const emit = defineEmits<{
         </span>
       </div>
       <span class="font-semibold text-primary text-base">
-        {{ props.yacht.pricePerHour }} $/час
+        {{ props.yacht.pricePerHour.toLocaleString('ru-RU') }} ₽/час
       </span>
     </div>
 

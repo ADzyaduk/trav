@@ -10,8 +10,8 @@ useHead({
 })
 
 useSeoMeta({
-  title: 'Яхты — TravelSite',
-  description: 'Аренда яхт: моторные, парусные и люксовые яхты для прогулок, мероприятий и морских путешествий.'
+  title: 'Аренда яхт в Сочи — TravelSite',
+  description: 'Аренда моторных и парусных яхт в Сочи: Порт Сочи и Порт Имеретинский. Прогулки, мероприятия и морские путешествия на комфортных яхтах.'
 })
 
 const store = useServicesStore()
@@ -34,8 +34,8 @@ function handleBookGroupTrip(trip: GroupTrip) {
 <template>
   <div>
     <UPageHero
-      title="Аренда яхт"
-      description="Моторные и парусные яхты для любого случая — от романтических прогулок до VIP-мероприятий. Выбирайте яхту и отправляйтесь в морское приключение!"
+      title="Аренда яхт в Сочи"
+      description="Моторные и парусные яхты в Порту Сочи и Порту Имеретинский — от романтических прогулок до VIP-мероприятий. Выбирайте яхту и отправляйтесь в морское приключение!"
       orientation="horizontal"
       :links="[
         { label: 'Позвонить', icon: 'i-lucide-phone', to: contacts.phoneHref, size: 'xl' as const },

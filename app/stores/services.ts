@@ -119,7 +119,7 @@ export const useServicesStore = defineStore('services', () => {
       length: '21.3 м',
       description: 'Премиальная яхта для VIP-мероприятий и эксклюзивных морских путешествий.',
       fullDescription: 'Royal Luxe 70 — флагман нашего флота. 21.3 метра роскоши: три каюты с ванными комнатами, джакузи на палубе, профессиональная кухня, бар и обеденная зона на 20 гостей. Экипаж из трёх человек к вашим услугам.',
-      pricePerHour: 450,
+      pricePerHour: 45000,
       image: '/images/yachts/royal-luxe-70.jpg',
       images: [
         '/images/yachts/royal-luxe-70.jpg'
@@ -138,7 +138,7 @@ export const useServicesStore = defineStore('services', () => {
       length: '12.8 м',
       description: 'Комфортная моторная яхта для дневных прогулок и небольших вечеринок.',
       fullDescription: 'Azure 42 — элегантная моторная яхта длиной 12.8 метров. Идеально подходит для дневных прогулок вдоль побережья, рыбалки и небольших вечеринок. На борту: просторная палуба для загара, салон с кондиционером, полностью оборудованная кухня и туалет.',
-      pricePerHour: 150,
+      pricePerHour: 15000,
       image: '/images/yachts/azure-42.jpg',
       images: [
         '/images/yachts/azure-42.jpg'
@@ -154,7 +154,7 @@ export const useServicesStore = defineStore('services', () => {
       length: '16.7 м',
       description: 'Просторная парусная яхта для романтических прогулок и морских путешествий.',
       fullDescription: 'Sea Breeze 55 — классическая парусная яхта длиной 16.7 метров. Две каюты, просторный кокпит и полный набор парусов. Идеальна для романтических закатов, дневных круизов и многодневных путешествий по островам. Капитан включён в стоимость.',
-      pricePerHour: 220,
+      pricePerHour: 22000,
       image: '/images/yachts/sea-breeze-55.jpg',
       images: [
         '/images/yachts/sea-breeze-55.jpg'
